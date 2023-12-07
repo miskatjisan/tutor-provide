@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\DistrictController;
 use App\Http\Controllers\AreaController;
@@ -12,9 +11,9 @@ use App\Http\Controllers\TutionTypeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PreferableClassController;
 use App\Http\Controllers\SubjectController;
-// use App\Http\Controllers\RoleController;
-// use App\Http\Controllers\UserController;
-// use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,12 +29,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Auth::routes();
+    Auth::routes();
 
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
-Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+// Route::post('/register', [AuthController::class, 'register']);
+// Route::post('/login', [AuthController::class, 'login']);
+// Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+// Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
 Route::apiResource('divisions', DivisionController::class);
 Route::apiResource('districts', DistrictController::class);
@@ -46,8 +45,8 @@ Route::resource('categories', CategoryController::class)->only(['index','store',
 Route::apiResource('preferable_classes', PreferableClassController::class);
 Route::apiResource('subjects', SubjectController::class);
 
-// Route::group(['middleware' => ['auth']], function() {
-//     Route::resource('roles', RoleController::class);
-//     Route::resource('users', UserController::class);
-//     Route::resource('products', ProductController::class);
-// });
+Route::group(['middleware' => ['auth:api']], function() {
+Route::apiResource('users', UserController::class);
+Route::apiResource('roles', RoleController::class);
+Route::apiResource('products', ProductController::class);
+});

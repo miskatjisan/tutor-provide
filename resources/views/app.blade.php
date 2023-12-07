@@ -33,7 +33,7 @@
 
   <!-- Import Js Files -->
 
-  @vite(['resources/js/app.js','resources/assets/jquery.min.js','resources/assets/app.min.js','resources/assets/app.init.js','resources/assets/bootstrap.bundle.min.js','resources/assets/simplebar.min.js','resources/assets/sidebarmenu.js','resources/assets/theme.js','resources/jquery-jvectormap.min.js','resources/assets/apexcharts.min.js','resources/assets/jquery-jvectormap-us-aea-en.js','resources/assets/dashboard.js','resources/assets/iconify-icon.min.js',])
+  @vite(['resources/js/app.js','resources/assets/jquery.min.js','resources/assets/app.min.js','resources/assets/app.init.js','resources/assets/bootstrap.bundle.min.js','resources/assets/simplebar.min.js','resources/assets/sidebarmenu.js','resources/assets/theme.js','resources/assets/iconify-icon.min.js',])
 
 <!-- theme Settings -->
 <script>

@@ -522,6 +522,10 @@
   color: #EB762A !important;
 }
 
+input,select,option,button,textarea,label{
+  font-size: 16px !important;
+}
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);

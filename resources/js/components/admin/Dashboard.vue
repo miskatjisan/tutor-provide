@@ -1,5 +1,6 @@
 <template>
   <div id="main-wrapper">
+    
 <!-- sidebar -->
 <Sidebar />
 <!-- sidebar -->
@@ -815,7 +816,7 @@
               </li>
             </ul>
             <div class="man-working-on-laptop">
-              <img src="../../assets/images/backgrounds/man-working-on-laptop.png" alt="" class="img-fluid">
+              <img src="../../../images/admin/assets/man-working-on-laptop.png" alt="" class="img-fluid">
             </div>
           </div>
         </div>
@@ -1123,7 +1124,7 @@
 </div>
   </div>
   <div class="col-lg-6 text-center">
-    <img src="../../images/assets/pi.png" alt="">
+    <img src="../../../images/assets/pi.png" alt="">
   </div>
 </div>
 
@@ -1317,7 +1318,7 @@
 </div>
   </div>
   <div class="col-lg-6 text-center">
-    <img src="../../images/assets/pi.png" alt="">
+    <img src="../../../images/assets/pi.png" alt="">
   </div>
 </div>
 
@@ -1512,7 +1513,7 @@
 </div>
   </div>
   <div class="col-lg-6 text-center">
-    <img src="../../images/assets/pi.png" alt="">
+    <img src="../../../images/assets/pi.png" alt="">
   </div>
 </div>
 

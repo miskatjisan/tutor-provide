@@ -24,7 +24,7 @@
 
         <div class="container employee-login">
             <div class="emloyee-login-logo">
-                <router-link :to="{ name: 'home' }"  target="_blank"><img src="public/../../images/upload_images/logo/logo2.png" alt="Site Logo" srcset=""></router-link>  
+                <router-link :to="{ name: 'home' }"  target="_blank"><img src="../../../images/upload_images/logo/logo2.png" alt="Site Logo" srcset=""></router-link>  
             </div>
 
             <div class="card">
@@ -89,9 +89,8 @@
 
 <script>
 
-import axios from "axios";
-
 export default {
+    
   data() {
     return {
       email: "",
@@ -106,32 +105,36 @@ export default {
 
 
     async login() {
-      try {
-        const response = await axios.post("/api/login", {
-          email: this.email,
-          password: this.password,
+    try {
+        const response = await this.$axios.post("/api/login", {
+            email: this.email,
+            password: this.password,
         });
-        this.validationErrors = [];
-        this.$router.push("/admin");
+        
+        this.$router.push({ name: 'admin_dashboard' });
 
-      } catch (error) {
+        // Assuming the response contains a 'message' key for success
+        console.log(response.data.message);
+      
+
+        // Redirect or perform any other action on successful login
+    } catch (error) {
         if (error.response.status === 401) {
-          this.validationErrors = ['Invalid credentials'];
+            this.validationErrors = ['Invalid credentials'];
         } else if (error.response.status === 422) {
-          this.validationErrors = Object.values(error.response.data.errors).flat();
+            this.validationErrors = Object.values(error.response.data.errors).flat();
         } else {
-          this.validationErrors = ['An error occurred. Please try again.'];
+            this.validationErrors = ['An error occurred. Please try again.'];
         }
-        console.error("Error during login:", error.response.data.message);
 
-        console.error(error.response.data.message);
-      }
-    },
+        console.error("Error during login:", error.response.data.message);
+    }
+},
+
   },
 };
 
 </script>
-
 <style>
 .is-invalid {
   border-color: red !important;

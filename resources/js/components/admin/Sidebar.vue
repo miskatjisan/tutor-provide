@@ -4,7 +4,7 @@
 
 <div class="brand-logo d-flex align-items-center justify-content-between">
   <a href="index.html" class="text-nowrap logo-img">
-    <img style="width:170px;height: 50px;" src="../../images/upload_images/logo/logo.png" alt="" srcset="">
+    <img style="width:170px;height: 50px;" src="../../../images/upload_images/logo/logo.png" alt="" srcset="">
   </a>
 </div>
 
@@ -250,16 +250,19 @@
     <div class="card-body p-4">
       <div class="d-flex align-items-center justify-content-between gap-3">
         <div class="d-flex align-items-center gap-3">
-          <img src="../../assets/images/profile/user-6.jpg" width="45" height="45" class="img-fluid rounded-circle" alt="" />
+          <img src="../../../images/admin/users/user-1.jpg" width="45" height="45" class="img-fluid rounded-circle" alt="" />
           <div>
-            <h5 class="mb-1">here chaange</h5>
-            <p class="mb-0">Admin</p>
+              <!-- Access the 'name' property of the authenticated user -->
+              <h5 class="mb-1">{{ authenticatedUser ? authenticatedUser.name : 'Guest' }}</h5>
+              <p class="mb-0">Admin</p>
+            </div>
           </div>
-        </div>
-        <a @click="logout" class="position-relative" data-bs-toggle="tooltip" data-bs-placement="top"
-          data-bs-title="Logout">
-        <iconify-icon icon="solar:logout-line-duotone" class="fs-8"></iconify-icon>
-        </a>
+          <!-- Call the 'logout' method when the logout button is clicked -->
+          <a @click="logout" class="position-relative" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Logout">
+            <!-- Replace the icon with your actual logout icon -->
+            <iconify-icon icon="solar:logout-line-duotone" class="fs-8"></iconify-icon>
+          </a>
+
       </div>
     </div>
   </div>
@@ -269,12 +272,40 @@
 </template>
 
 <script>
-
 export default {
+  data() {
+    return {
+      authenticatedUser: null,
+    };
+  },
+  async mounted() {
+  // Check if $auth is defined before using it
+  if (this.$auth && this.$auth.isAuthenticated) {
+    await this.fetchUserData();
+  }
+},
   methods: {
-    logout() {
-    
-      this.$router.push({ name: 'admin_login' });
+    async fetchUserData() {
+      try {
+        // Fetch user data only if the user is authenticated
+        const response = await this.$axios.get('/api/user');
+
+        // Update the state with the authenticated user data
+        this.authenticatedUser = response.data;
+      } catch (error) {
+        console.error('Error fetching user data', error);
+      }
+    },
+    async logout() {
+      try {
+        // Perform the logout action on the backend
+        await this.$axios.post('/api/logout');
+
+        // Redirect to the login page
+        this.$router.push({ name: 'admin_login' });
+      } catch (error) {
+        console.error('Error logging out', error);
+      }
     },
   },
 };
